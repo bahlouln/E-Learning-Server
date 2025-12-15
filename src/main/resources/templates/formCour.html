@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter un Cours</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+
+<div layout:fragment="content">
+
+<div class="card">
+    <div class="card-header">
+        <h2>Ajouter / Modifier un Cours</h2>
+        <a th:href="@{/cours/index}" class="btn btn-primary">⬅ Retour à la liste</a>
+    </div>
+
+   <form th:action="@{/cours/save}" th:object="${cours}" method="post">
+
+    <label for="code">Code :</label>
+    <input type="text" id="code" th:field="*{code}" placeholder="Code du cours" required />
+
+    <label for="titre">Titre :</label>
+    <input type="text" id="titre" th:field="*{titre}" placeholder="Titre du cours" required />
+
+    <label for="description">Description :</label>
+    <textarea id="description" th:field="*{description}" placeholder="Description du cours"></textarea>
+
+    
+
+    <label for="formateurs">Formateurs :</label>
+    <select id="formateurs" th:field="*{formateurs}" multiple>
+        <option th:each="f : ${formateurs}" th:value="${f.id}" th:text="${f.nom}">Nom formateur</option>
+    </select>
+
+    <label for="etudiants">Étudiants :</label>
+    <select id="etudiants" th:field="*{etudiants}" multiple>
+        <option th:each="e : ${etudiants}" th:value="${e.id}" th:text="${e.nom + ' ' + e.prenom}">Nom étudiant</option>
+    </select>
+
+    <div style="margin-top:20px; text-align:center;">
+        <button type="submit" class="btn btn-primary">💾 Enregistrer</button>
+        <a th:href="@{/cours/index}" class="btn btn-danger">Annuler</a>
+    </div>
+</form>
+
+</div>
+
+
+</div>
+
+</body>
+</html>

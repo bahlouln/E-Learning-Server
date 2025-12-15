@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier un Formateur</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+
+<div layout:fragment="content">
+
+    <div class="card">
+        <div class="card-header">
+            <h2> Modifier un Formateur</h2>
+            <a th:href="@{/formateur/index}" class="btn btn-primary">⬅ Retour à la liste</a>
+        </div>
+
+        <form th:action="@{/formateur/update}" th:object="${formateur}" method="post">
+            <input type="hidden" th:field="*{id}" />
+
+            <label for="nom">Nom :</label>
+            <input type="text" id="nom" th:field="*{nom}" placeholder="Entrez le nom complet" />
+
+            <label for="specialite">Spécialité :</label>
+            <input type="text" id="specialite" th:field="*{specialite}" placeholder="Ex: Java, Spring Boot..." />
+
+            <label for="email">Email :</label>
+            <input type="email" id="email" th:field="*{email}" placeholder="exemple@mail.com" />
+
+            <div style="margin-top:20px; text-align:center;">
+                <button type="submit" class="btn btn-warning">💾 Mettre à jour</button>
+                <a th:href="@{/formateur/index}" class="btn btn-danger">Annuler</a>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>

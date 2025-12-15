@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmation</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+
+<div layout:fragment="content">
+
+    <div class="card" style="text-align:center; padding:40px;">
+        <h2 style="color:green;">✅ Opération réussie</h2>
+
+
+        <div style="margin-top:20px;">
+            <a th:href="@{/formateur/index}" class="btn btn-primary">⬅ Retour à la liste des formateurs</a>
+            <a th:href="@{/formateur/form}" class="btn btn-warning">➕ Ajouter un autre formateur</a>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

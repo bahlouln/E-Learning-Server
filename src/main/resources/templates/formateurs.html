@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Formateurs</title>
+
+    <!-- Injection du CSS spécifique -->
+   <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div layout:fragment="content">
+
+    <div class="card">
+        <div class="card-header">
+            <h2> Liste des Formateurs</h2>
+            <a th:href="@{/formateur/form}" class="btn btn-primary">
+                 Ajouter un Formateur
+            </a>
+        </div>
+
+        <div class="table-container">
+            <table class="styled-table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom Complet</th>
+                    <th>Spécialité</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="f, stat : ${formateurs}">
+                    <td th:text="${stat.index + 1}"></td>
+                    <td><strong th:text="${f.nom}"></strong></td>
+                    <td><span  th:text="${f.specialite}"></span></td>
+                    <td th:text="${f.email}"></td>
+                    <td class="actions">
+                        <a th:href="@{|/formateur/edit?id=${f.id}|}" class="btn btn-sm btn-warning">Modifier</a>
+                        <a th:href="@{|/formateur/delete?id=${f.id}|}"
+                           class="btn btn-sm btn-danger"
+                           onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce formateur ?')">
+                            Supprimer
+                        </a>
+                    </td>
+                </tr>
+
+                <tr th:if="${#lists.isEmpty(formateurs)}">
+                    <td colspan="5" class="empty-msg">
+                        Aucun formateur enregistré.<br><br>
+                        <a th:href="@{/formateur/form}" class="btn btn-primary">Commencer à ajouter</a>
+                    </td>
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title layout:fragment="title">Gestion des Formateurs</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+
+    <!-- Barre de navigation horizontale -->
+    <nav class="navbar">
+        <div class="navbar-brand">SkillRise</div>
+        <ul class="navbar-links">
+            <li><a href="#">Accueil</a></li>
+            <li><a th:href="@{/formateur/index}">Formateurs</a></li>
+<li><a th:href="@{/cours/index}">Cours</a></li>
+            <li><a href="#">Étudiants</a></li>
+            <li><a href="#">Paramètres</a></li>
+        </ul>
+    </nav>
+
+    <!-- Contenu spécifique à chaque page -->
+    <main layout:fragment="content" class="content">
+        <!-- Ici viendra le contenu injecté par les autres pages -->
+    </main>
+
+    <!-- Footer global -->
+    <footer class="footer">
+        <hr/>
+        <p>&copy; 2025 - SkillRise Institute</p>
+    </footer>
+
+</body>
+</html>
