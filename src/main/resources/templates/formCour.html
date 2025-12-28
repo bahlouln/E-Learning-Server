@@ -18,10 +18,13 @@
     </div>
 
    <form th:action="@{/cours/save}" th:object="${cours}" method="post">
-
-    <label for="code">Code :</label>
-    <input type="text" id="code" th:field="*{code}" placeholder="Code du cours" required />
-
+    
+            <input type="hidden" th:field="*{id}" />
+            
+            <label for="code">Code :</label>
+            <input type="text" id="code" th:field="*{code}" placeholder="Code du cours" required />
+    
+    
     <label for="titre">Titre :</label>
     <input type="text" id="titre" th:field="*{titre}" placeholder="Titre du cours" required />
 
@@ -30,15 +33,7 @@
 
     
 
-    <label for="formateurs">Formateurs :</label>
-    <select id="formateurs" th:field="*{formateurs}" multiple>
-        <option th:each="f : ${formateurs}" th:value="${f.id}" th:text="${f.nom}">Nom formateur</option>
-    </select>
 
-    <label for="etudiants">Étudiants :</label>
-    <select id="etudiants" th:field="*{etudiants}" multiple>
-        <option th:each="e : ${etudiants}" th:value="${e.id}" th:text="${e.nom + ' ' + e.prenom}">Nom étudiant</option>
-    </select>
 
     <div style="margin-top:20px; text-align:center;">
         <button type="submit" class="btn btn-primary">💾 Enregistrer</button>

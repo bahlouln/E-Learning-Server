@@ -28,9 +28,9 @@
                 <thead>
                 <tr>
                     <th>ID</th>
+                    <th>code</th>
                     <th>Nom du Cours</th>
                     <th>Description</th>
-                    <th>Formateur</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -38,14 +38,15 @@
                 <tbody>
 <tr th:each="c, stat : ${cours}">
     <td th:text="${stat.index + 1}"></td>
+    <td th:text="${c.code}"></td>
+
+    
     <td th:text="${c.titre}">Titre du cours</td>
     <td th:text="${c.description}">Description du cours</td>
-    <td>
-        <span th:each="f : ${c.formateurs}" th:text="${f.nom} + ' '">Formateur</span>
-    </td>
+    
     <td class="actions">
-        <a th:href="@{/cours/edit?code=${c.code}}" class="btn btn-sm btn-warning">Modifier</a>
-        <a th:href="@{/cours/delete?code=${c.code}}" 
+        <a th:href="@{/cours/edit(id=${c.id})}" class="btn btn-sm btn-warning">Modifier</a>
+        <a th:href="@{/cours/delete(id=${c.id})}" 
            class="btn btn-sm btn-danger"
            onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce cours ?')">Supprimer</a>
     </td>

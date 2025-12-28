@@ -16,7 +16,7 @@ public class Formateur {
     private String email;
 
     
-    @ManyToMany(mappedBy = "formateurs")
+    @ManyToMany
     private List<Cours> cours = new ArrayList<>();
 
 	public Long getId() {

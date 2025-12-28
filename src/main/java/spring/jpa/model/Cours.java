@@ -16,18 +16,19 @@ import jakarta.persistence.OneToMany;
 
 @Entity
 public class Cours {
-	 @Id
-	 @Column(unique = true)//champ unique (code)
-	 @GeneratedValue
-	 private Long code;
+	@Id
+	@GeneratedValue
+	private Long id; // identifiant technique auto-généré
+	@Column(unique = true, nullable = false)	
+	 private String code;
 	 private String titre;
 	 private String description;
-	 @ManyToMany
+	 @ManyToMany(mappedBy = "cours")
 	 private List<Formateur> formateurs = new ArrayList<>();
 	 @ManyToMany
 	 @JoinTable(
 	     name = "cours_etudiants",
-	     joinColumns = @JoinColumn(name = "cours_code"),
+	     joinColumns = @JoinColumn(name = "cours_id"),
 	     inverseJoinColumns = @JoinColumn(name = "etudiant_matricule")
 	 )
 	 private List<Etudiant> etudiants = new ArrayList<>();
@@ -36,10 +37,20 @@ public class Cours {
 
 	 @OneToMany(mappedBy = "cours")
 	 private List<Inscription> inscriptions = new ArrayList<>();
-	public Long getCode() {
+	 
+	 
+	 public Long getId() {
+	        return id;
+	    }
+
+	    public void setId(Long id) {
+	        this.id = id;
+	    }
+	
+	public String getCode() {
 		return code;
 	}
-	public void setCode(Long code) {
+	public void setCode(String code) {
 		this.code = code;
 	}
 	public String getTitre() {

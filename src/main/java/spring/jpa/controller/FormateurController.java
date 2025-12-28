@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import spring.jpa.model.Formateur;
 import spring.jpa.repository.FormateursRepository;
-
+import spring.jpa.service.CourService;
 import java.util.List;
 
 @Controller
@@ -19,7 +19,10 @@ public class FormateurController {
 
     @Autowired
     private FormateursRepository formateurRepos;
-
+    @Autowired
+    private CourService courService; 
+    
+    
     // 🔹 Afficher tous les formateurs
     @GetMapping("/index")
     public String index(Model model) {
@@ -32,36 +35,30 @@ public class FormateurController {
     @GetMapping("/form")
     public String formFormateur(Model model) {
         model.addAttribute("formateur", new Formateur());
+        model.addAttribute("cours", courService.getAllCours());
         return "formFormateur"; // vue Thymeleaf : formFormateur.html
     }
 
-    // 🔹 Sauvegarde d’un nouveau formateur
     @PostMapping("/save")
-    public String save(@Valid Formateur formateur, BindingResult bindingResult) {
+    public String save(@Valid Formateur formateur, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            return "formFormateur";
+            model.addAttribute("cours", courService.getAllCours()); // ajouter les cours à nouveau
+            return "formFormateur"; // renvoyer le formulaire avec les erreurs
         }
         formateurRepos.save(formateur);
-        return "confirmation"; // vue confirmation.html
+        return "confirmation";
     }
+
 
     // 🔹 Edition d’un formateur existant
     @GetMapping("/edit")
     public String edit(@RequestParam("id") Long id, Model model) {
         Formateur f = formateurRepos.findById(id).orElse(null);
         model.addAttribute("formateur", f);
-        return "editFormateur"; // vue editFormateur.html
+        model.addAttribute("cours", courService.getAllCours());
+        return "formFormateur"; // 
     }
 
-    // 🔹 Mise à jour d’un formateur
-    @PostMapping("/update")
-    public String update(@Valid Formateur formateur, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "editFormateur";
-        }
-        formateurRepos.save(formateur);
-        return "confirmation";
-    }
 
     // 🔹 Suppression d’un formateur
     @GetMapping("/delete")

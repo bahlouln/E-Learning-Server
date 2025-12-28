@@ -35,36 +35,36 @@ public class CourController {
 
     // Sauvegarde
     @PostMapping("/save")
-    public String save(@Valid Cours cours, BindingResult bindingResult) {
+    public String save(@Valid @ModelAttribute("cours") Cours cours, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "Cours";
+            return "formCour";
         }
-        coursService.createCours(cours);
-        return "formCour";
+        
+        // Si l'id existe, c'est une mise à jour, sinon c'est une création
+        if (cours.getId() != null) {
+            coursService.updateCours(cours.getId(), cours);
+        } else {
+            coursService.createCours(cours);
+        }
+        
+        return "redirect:/cours/index";
     }
 
     // Edition cours existant
     @GetMapping("/edit")
-    public String edit(@RequestParam("code") String code, Model model) {
-        Cours cours = coursService.getCoursByCode(code).orElse(null);
+    public String edit(@RequestParam("id") Long id, Model model) {
+        Cours cours = coursService.getCoursByID(id)
+                .orElseThrow(() -> new IllegalArgumentException("Cours introuvable avec l'id : " + id));
         model.addAttribute("cours", cours);
-        return "editCours";
+        return "formCour";
     }
 
-    // Mise à jour
-    @PostMapping("/update")
-    public String update(@Valid Cours cours, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "editCours";
-        }
-        coursService.createCours(cours); // save() fait create/update
-        return "cours";
-    }
+
 
     // Suppression
     @GetMapping("/delete")
-    public String delete(@RequestParam("code") String code) {
-        coursService.deleteCours(code);
+    public String delete(@RequestParam("id") Long id) {
+        coursService.deleteCours(id);
         return "redirect:/cours/index";
     }
 }

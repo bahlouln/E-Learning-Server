@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import spring.jpa.model.Cours;
 
 @Repository
-public interface CoursRepository extends JpaRepository<Cours, String> {
+public interface CoursRepository extends JpaRepository<Cours, Long> {
 
 }

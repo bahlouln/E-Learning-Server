@@ -29,7 +29,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Nom Complet</th>
-                    <th>Spécialité</th>
+                    <th>Cour</th>
                     <th>Email</th>
                     <th>Actions</th>
                 </tr>
@@ -39,15 +39,18 @@
                 <tr th:each="f, stat : ${formateurs}">
                     <td th:text="${stat.index + 1}"></td>
                     <td><strong th:text="${f.nom}"></strong></td>
-                    <td><span  th:text="${f.specialite}"></span></td>
+<td>
+    <span th:each="c : ${f.cours}" th:text="${c.titre}" th:unless="${#lists.isEmpty(f.cours)}"></span>
+    <span th:if="${#lists.isEmpty(f.cours)}">Aucun cours</span>
+</td>
                     <td th:text="${f.email}"></td>
                     <td class="actions">
-                        <a th:href="@{|/formateur/edit?id=${f.id}|}" class="btn btn-sm btn-warning">Modifier</a>
-                        <a th:href="@{|/formateur/delete?id=${f.id}|}"
-                           class="btn btn-sm btn-danger"
-                           onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce formateur ?')">
-                            Supprimer
-                        </a>
+                        <a th:href="@{/formateur/edit(id=${f.id})}" class="btn btn-sm btn-warning">Modifier</a>
+<a th:href="@{/formateur/delete(id=${f.id})}"
+   class="btn btn-sm btn-danger"
+   onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce formateur ?')">
+    Supprimer
+</a>
                     </td>
                 </tr>
 

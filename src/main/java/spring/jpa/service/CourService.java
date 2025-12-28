@@ -19,9 +19,9 @@ public class CourService {
         return coursRepository.findAll();
     }
 
-    // Get by code
-    public Optional<Cours> getCoursByCode(String code) {
-        return coursRepository.findById(code);
+
+    public Optional<Cours> getCoursByID(Long id) {
+        return coursRepository.findById(id);
     }
 
     // Create
@@ -30,22 +30,21 @@ public class CourService {
     }
 
     // Update
-    public Optional<Cours> updateCours(String code, Cours coursDetails) {
-        return coursRepository.findById(code).map(cours -> {
-
+    public Optional<Cours> updateCours(Long id, Cours coursDetails) {
+        return coursRepository.findById(id).map(cours -> {
+            cours.setCode(coursDetails.getCode());           // ✅ Ajouté
             cours.setTitre(coursDetails.getTitre());
             cours.setDescription(coursDetails.getDescription());
             cours.setFormateurs(coursDetails.getFormateurs());
             cours.setEtudiants(coursDetails.getEtudiants());
-
             return coursRepository.save(cours);
         });
     }
 
     // Delete
-    public boolean deleteCours(String code) {
-        if (coursRepository.existsById(code)) {
-            coursRepository.deleteById(code);
+    public boolean deleteCours(Long id) {
+        if (coursRepository.existsById(id)) {
+            coursRepository.deleteById(id);
             return true;
         }
         return false;
