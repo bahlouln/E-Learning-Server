@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion</title>
+
+    <!-- CSS Global -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <!-- CSS pour la page de login -->
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h1>Bienvenue</h1>
+                <p>Connectez-vous à votre compte</p>
+            </div>
+
+            <div class="auth-content">
+                <!-- Message d'erreur (affiché conditionnellement avec Thymeleaf) -->
+                <div th:if="${param.error}" class="auth-alert auth-alert-error">
+                    Identifiants invalides. Veuillez réessayer.
+                </div>
+
+
+
+                <form th:action="@{/login}" method="post" class="auth-form">
+                    <div class="auth-field">
+                        <label for="username">Email</label>
+                        <div class="auth-input-wrapper">
+                            <span class="auth-icon">👤</span>
+                            <input type="text"
+                                   id="username"
+                                   name="username"
+                                   placeholder="Entrez votre email"
+                                   required
+                                   autofocus/>
+                        </div>
+                    </div>
+
+                    <div class="auth-field">
+                        <label for="password">Mot de passe</label>
+                        <div class="auth-input-wrapper">
+                            <span class="auth-icon">🔒</span>
+                            <input type="password"
+                                   id="password"
+                                   name="password"
+                                   placeholder="Entrez votre mot de passe"
+                                   required/>
+                        </div>
+                    </div>
+
+                    <div class="auth-remember">
+                        <input type="checkbox" id="remember" name="remember-me">
+                        <label for="remember">Se souvenir de moi</label>
+                    </div>
+
+                    <button type="submit" class="auth-submit-btn">Se connecter</button>
+
+                    <div class="auth-footer">
+                        <a href="#" th:href="@{/forgot-password}">Mot de passe oublié ?</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -21,8 +21,9 @@ public class Etudiant {
 
 
     // 🔹 Relation ManyToMany avec Groupe
-    @ManyToMany(mappedBy = "etudiants")
+    @ManyToMany(mappedBy = "etudiants", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Groupe> groupes = new ArrayList<>();
+
 
     // --- Getters & Setters ---
     public String getMatricule() {

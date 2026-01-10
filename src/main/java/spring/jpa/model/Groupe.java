@@ -3,6 +3,7 @@ package spring.jpa.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,7 +27,7 @@ public class Groupe {
     private int nombreLimite;
 
     // Relation ManyToMany avec Etudiant
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
         name = "groupe_etudiants",
         joinColumns = @JoinColumn(name = "groupe_id", referencedColumnName = "id"),

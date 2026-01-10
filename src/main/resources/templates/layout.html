@@ -17,6 +17,14 @@
 <li><a th:href="@{/cours/index}">Cours</a></li>
             <li><a th:href="@{/etudiant/index}">Étudiants</a></li>
             <li><a th:href="@{/groupe/index}">Groupes</a></li>
+ <li>
+                <form th:action="@{/logout}" method="post" style="display: inline;">
+                    <button type="submit" class="btn btn-danger btn-sm" 
+                            style="border: none; cursor: pointer;">
+                        Déconnexion
+                    </button>
+                </form>
+            </li>            
         </ul>
     </nav>
 

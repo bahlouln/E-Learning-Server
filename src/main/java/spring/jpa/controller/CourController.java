@@ -1,6 +1,7 @@
 package spring.jpa.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/cours")
+
 public class CourController {
 
     @Autowired
@@ -20,6 +22,7 @@ public class CourController {
 
     // Afficher tous les cours
     @GetMapping("/index")
+
     public String index(Model model) {
         List<Cours> cours = coursService.getAllCours();
         model.addAttribute("cours", cours);

@@ -1,6 +1,6 @@
 package spring.jpa.controller;
 import org.springframework.data.jpa.repository.JpaRepository;
-
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +25,7 @@ public class FormateurController {
     
     // 🔹 Afficher tous les formateurs
     @GetMapping("/index")
+    @PreAuthorize("hasRole('ADMIN')")
     public String index(Model model) {
         List<Formateur> formateurs = formateurRepos.findAll();
         model.addAttribute("formateurs", formateurs);
@@ -46,7 +47,7 @@ public class FormateurController {
             return "formFormateur"; // renvoyer le formulaire avec les erreurs
         }
         formateurRepos.save(formateur);
-        return "confirmation";
+        return "redirect:/formateur/index";
     }
 
 
