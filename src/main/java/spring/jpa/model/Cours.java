@@ -25,19 +25,10 @@ public class Cours {
 	 private String description;
 	 @ManyToMany(mappedBy = "cours")
 	 private List<Formateur> formateurs = new ArrayList<>();
-	 @ManyToMany
-	 @JoinTable(
-	     name = "cours_etudiants",
-	     joinColumns = @JoinColumn(name = "cours_id"),
-	     inverseJoinColumns = @JoinColumn(name = "etudiant_matricule")
-	 )
-	 private List<Etudiant> etudiants = new ArrayList<>();
 
-
-
+	
 	 @OneToMany(mappedBy = "cours")
-	 private List<Inscription> inscriptions = new ArrayList<>();
-	 
+	 private List<Groupe> groupes = new ArrayList<>();
 	 
 	 public Long getId() {
 	        return id;
@@ -71,18 +62,6 @@ public class Cours {
 	public void setFormateurs(List<Formateur> formateurs) {
 		this.formateurs = formateurs;
 	}
-	public List<Etudiant> getEtudiants() {
-		return etudiants;
-	}
-	public void setEtudiants(List<Etudiant> etudiants) {
-		this.etudiants = etudiants;
-	}
-	public List<Inscription> getInscriptions() {
-		return inscriptions;
-	}
-	public void setInscriptions(List<Inscription> inscriptions) {
-		this.inscriptions = inscriptions;
-	}
-	 
+
 
 }

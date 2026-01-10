@@ -30,9 +30,9 @@ a:hover {
     align-items: center;
     background: var(--primary-dark);
     color: white;
-    padding: 15px 30px;
+    padding: 15px 0px;
     border-radius: 8px;
-    margin: 20px 0;
+    margin: 0px 0;
 }
 
 .navbar-brand {

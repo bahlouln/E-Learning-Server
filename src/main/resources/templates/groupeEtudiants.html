@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Étudiants du Groupe</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+
+<div layout:fragment="content">
+
+    <div class="card">
+        <div class="card-header">
+            <h2> Étudiants du Groupe [[${groupe.nom}]]</h2>
+            <a th:href="@{/groupe/index}" class="btn btn-primary">⬅ Retour aux groupes</a>
+            <a th:href="@{/groupe/addEtudiantForm(id=${groupe.id})}" class="btn btn-success">➕ Ajouter un Étudiant</a>
+        </div>
+        <!-- Popup si erreur --> 
+        <script th:if="${errorMessage}" th:inline="javascript"> alert([[${errorMessage}]]); 
+        </script>
+        
+
+        <div class="table-container">
+        
+            <table class="styled-table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Matricule</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="e, stat : ${etudiants}">
+                    <td th:text="${stat.index + 1}"></td>
+                    <td th:text="${e.matricule}"></td>
+                    <td th:text="${e.nom}"></td>
+                    <td th:text="${e.prenom}"></td>
+                    <td th:text="${e.email}"></td>
+                    <td> <a th:href="@{/groupe/removeEtudiant(id=${groupe.id}, matricule=${e.matricule})}" class="btn btn-danger" onclick="return confirm('Supprimer [[${e.nom}]] [[${e.prenom}]] du groupe ?');"> 🗑 Supprimer </a> </td>
+                </tr>
+
+                <tr th:if="${#lists.isEmpty(etudiants)}">
+                    <td colspan="5" class="empty-msg">Aucun étudiant dans ce groupe.</td>
+                </tr>
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

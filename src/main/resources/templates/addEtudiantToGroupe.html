@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter un Étudiant au Groupe</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+
+<div layout:fragment="content">
+
+    <div class="card">
+        <div class="card-header">
+            <h2> Ajouter un Étudiant au Groupe [[${groupe.nom}]]</h2>
+            <a th:href="@{/groupe/etudiants(id=${groupe.id})}" class="btn btn-primary">⬅ Retour</a>
+        </div>
+
+        <form th:action="@{/groupe/addEtudiant(id=${groupe.id})}" method="post">
+            <label for="etudiant">Choisir un étudiant :</label>
+            <select id="etudiant" name="matricule">
+                <option th:each="e : ${etudiants}" th:value="${e.matricule}" th:text="${e.nom + ' ' + e.prenom}"></option>
+            </select>
+
+            <div style="margin-top:20px; text-align:center;">
+                <button type="submit" class="btn btn-success">Ajouter</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>

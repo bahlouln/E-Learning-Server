@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Groupes</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+
+<div layout:fragment="content">
+
+    <div class="card">
+        <div class="card-header">
+            <h2> Liste des Groupes</h2>
+            <a th:href="@{/groupe/form}" class="btn btn-primary">
+                Ajouter un Groupe
+            </a>
+        </div>
+
+        <div class="table-container">
+            <table class="styled-table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nom</th>
+                    <th>Nombre Limite</th>
+                    <th>Cours</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="g, stat : ${groupes}">
+                    <td th:text="${stat.index + 1}"></td>
+                    <td th:text="${g.nom}"></td>
+                    <td th:text="${g.nombreLimite}"></td>
+<td>
+    <span th:if="${g.cours != null}" th:text="${g.cours.titre}"></span>
+    <span th:if="${g.cours == null}">Aucun cours</span>
+</td>
+                
+                    <td class="actions">
+                        <a th:href="@{/groupe/edit(id=${g.id})}" class="btn btn-sm btn-warning">Modifier</a>
+                        <a th:href="@{/groupe/delete(id=${g.id})}"
+                           class="btn btn-sm btn-danger"
+                           onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce groupe ?')">
+                            Supprimer
+                        </a>
+                        <!-- 🔹 Nouveau bouton : voir les étudiants -->
+                         <a th:href="@{/groupe/etudiants(id=${g.id})}" class="btn btn-sm btn-info">Voir Étudiants</a>
+                    </td>
+                </tr>
+
+                <tr th:if="${#lists.isEmpty(groupes)}">
+                    <td colspan="6" class="empty-msg">
+                        Aucun groupe enregistré.<br><br>
+                        <a th:href="@{/groupe/form}" class="btn btn-primary">Commencer à ajouter</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

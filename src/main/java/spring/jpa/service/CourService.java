@@ -36,7 +36,6 @@ public class CourService {
             cours.setTitre(coursDetails.getTitre());
             cours.setDescription(coursDetails.getDescription());
             cours.setFormateurs(coursDetails.getFormateurs());
-            cours.setEtudiants(coursDetails.getEtudiants());
             return coursRepository.save(cours);
         });
     }

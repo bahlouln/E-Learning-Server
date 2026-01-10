@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Étudiants</title>
+
+    <!-- Injection du CSS spécifique -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div layout:fragment="content">
+
+    <div class="card">
+        <div class="card-header">
+            <h2> Liste des Étudiants</h2>
+            <a th:href="@{/etudiant/form}" class="btn btn-primary">
+                 Ajouter un Étudiant
+            </a>
+        </div>
+
+        <div class="table-container">
+            <table class="styled-table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Matricule</th>
+                    <th>Nom Complet</th>
+                    <th>Email</th>
+                    <th>Date d'inscription</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <!-- Boucle sur la liste des étudiants -->
+                <tr th:each="e, stat : ${etudiants}">
+                    <td th:text="${stat.index + 1}"></td>
+                    <td th:text="${e.matricule}"></td>
+                    <td><strong th:text="${e.nom + ' ' + e.prenom}"></strong></td>
+                    <td th:text="${e.email}"></td>
+                    <td th:text="${e.dateInscription}"></td>
+                   
+                    <td class="actions">
+                        <a th:href="@{/etudiant/edit(matricule=${e.matricule})}" class="btn btn-sm btn-warning">Modifier</a>
+                        <a th:href="@{/etudiant/delete(matricule=${e.matricule})}"
+                           class="btn btn-sm btn-danger"
+                           onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet étudiant ?')">
+                            Supprimer
+                        </a>
+                    </td>
+                </tr>
+
+                <!-- Message si aucun étudiant -->
+                <tr th:if="${#lists.isEmpty(etudiants)}">
+                    <td colspan="7" class="empty-msg">
+                        Aucun étudiant enregistré.<br><br>
+                        <a th:href="@{/etudiant/form}" class="btn btn-primary">Commencer à ajouter</a>
+                    </td>
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
