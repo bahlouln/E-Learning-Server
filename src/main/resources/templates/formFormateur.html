@@ -18,6 +18,8 @@
         </div>
 
         <form th:action="@{/formateur/save}" th:object="${formateur}" method="post">
+            <label for="matricule">Matricule :</label>
+<input type="text" id="matricule" th:field="*{matricule}" placeholder="Exemple : FRM123" required />
             
             <label for="nom">Nom :</label>
             <input type="text" id="nom" th:field="*{nom}" placeholder="Entrez le nom complet" />
@@ -29,7 +31,13 @@
 
             <label for="email">Email :</label>
             <input type="email" id="email" th:field="*{email}" placeholder="exemple@mail.com" />
-
+             <label for="password">Mot de passe :</label>
+<input type="password"
+       id="password"
+       th:field="*{password}"
+       placeholder="Entrez un mot de passe"
+       required />
+             
             <div style="margin-top:20px; text-align:center;">
                 <button type="submit" class="btn btn-primary">💾 Enregistrer</button>
                 <a th:href="@{/formateur/index}" class="btn btn-danger">Annuler</a>

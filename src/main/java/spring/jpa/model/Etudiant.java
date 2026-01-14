@@ -5,9 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Etudiant {
+public class Etudiant extends Utilisateur{
 
-    @Id
     @Column(nullable = false, unique = true)
     private String matricule; // identifiant métier (non auto-généré)
 
@@ -68,4 +67,5 @@ public class Etudiant {
     public void setGroupes(List<Groupe> groupes) {
         this.groupes = groupes;
     }
+
 }

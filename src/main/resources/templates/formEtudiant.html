@@ -35,7 +35,11 @@
             <label for="dateInscription">Date d'inscription :</label>
             <input type="date" id="dateInscription" th:field="*{dateInscription}" />
 
-           
+<div>
+    <label>Mot de passe :</label>
+    <input type="password" th:field="*{password}" required />
+    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+</div>      
 
             <div style="margin-top:20px; text-align:center;">
                 <button type="submit" class="btn btn-primary">💾 Enregistrer</button>

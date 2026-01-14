@@ -11,6 +11,8 @@ import jakarta.validation.Valid;
 import spring.jpa.model.Formateur;
 import spring.jpa.repository.FormateursRepository;
 import spring.jpa.service.CourService;
+import spring.jpa.service.FormateurService;
+
 import java.util.List;
 
 @Controller
@@ -21,7 +23,8 @@ public class FormateurController {
     private FormateursRepository formateurRepos;
     @Autowired
     private CourService courService; 
-    
+    @Autowired
+    private FormateurService formateurService;
     
     // 🔹 Afficher tous les formateurs
     @GetMapping("/index")
@@ -39,14 +42,13 @@ public class FormateurController {
         model.addAttribute("cours", courService.getAllCours());
         return "formFormateur"; // vue Thymeleaf : formFormateur.html
     }
-
     @PostMapping("/save")
     public String save(@Valid Formateur formateur, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("cours", courService.getAllCours()); // ajouter les cours à nouveau
-            return "formFormateur"; // renvoyer le formulaire avec les erreurs
+            model.addAttribute("cours", courService.getAllCours());
+            return "formFormateur";
         }
-        formateurRepos.save(formateur);
+        formateurService.createFormateur(formateur); // <-- utilise le service
         return "redirect:/formateur/index";
     }
 

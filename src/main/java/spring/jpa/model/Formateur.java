@@ -5,11 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Formateur {
+public class Formateur extends Utilisateur{
 
-    @Id
-    @GeneratedValue
-    private Long id;
+	@Column(nullable = false, unique = true)
+    private String matricule;
 
     private String nom;
     private String specialite;
@@ -19,13 +18,7 @@ public class Formateur {
     @ManyToMany
     private List<Cours> cours = new ArrayList<>();
 
-	public Long getId() {
-		return id;
-	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getNom() {
 		return nom;
@@ -57,6 +50,14 @@ public class Formateur {
 
 	public void setCours(List<Cours> cours) {
 		this.cours = cours;
+	}
+
+	public String getMatricule() {
+		return matricule;
+	}
+
+	public void setMatricule(String matricule) {
+		this.matricule = matricule;
 	}
 
     

@@ -10,6 +10,11 @@ public class Admin {
     @Id
     @GeneratedValue
     private Long id;
+    @Column(unique = true, nullable = false)
+    private String email;
+
+    @Column(nullable = false)
+    private String password; // stocké en BCrypt
 
     public Long getId() {
 		return id;
@@ -35,11 +40,7 @@ public class Admin {
 		this.password = password;
 	}
 
-	@Column(unique = true, nullable = false)
-    private String email;
-
-    @Column(nullable = false)
-    private String password; // stocké en BCrypt
+	
 
     // getters/setters
 }
